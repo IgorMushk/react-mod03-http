@@ -20,23 +20,36 @@ export class App extends Component {
   state = {
     articles: [],
     isLoading: false,
+    error: null,
   };
 
 
   async componentDidMount() {
     this.setState({ isLoading: true });
-    const response = await axios.get("/search?query=react");
-    this.setState({ articles: response.data.hits, isLoading: false, });
-    console.log('articles', this.state.articles)
+    try {
+      const response = await axios.get("/search?query=react");
+      this.setState({ articles: response.data.hits });
+      console.log('articles', this.state.articles)
+      // For 404 error
+    } catch (error){
+      this.setState({error})
+      console.log(this.state.error.message)
+    } finally {
+      this.setState({isLoading: false})
+    }
+
   }
 
   render() {
-    const { articles, isLoading } = this.state;
+    const { articles, isLoading, error } = this.state;
     return (
       <div>
         {/* {articles.length > 0 ? <ArticleList articles={articles} /> : null} */}
         {/* {isLoading ? <p>Loading...</p> : <ArticleList articles={articles} /> } */}
-        {isLoading ? <HelpLinksLoader/> : <ArticleList articles={articles} /> }
+        {/* {isLoading ? <HelpLinksLoader/> : <ArticleList articles={articles} /> } */}
+        {error && <p>Whoops, something went wrong: {error.message}</p>}
+        {isLoading && <p>Loading...</p>}
+        {articles.length > 0 && <ArticleList articles={articles} />}
       </div>
     );
   }
