@@ -39,8 +39,8 @@ export class App extends Component {
 
       const articles = await fetchArticlesWithQuery("react");
       this.setState({ articles});
-      console.log('articles :', articles)
-      console.log('articles: data.hits', this.state.articles)
+      //console.log('articles :', articles)
+      //console.log('articles: data.hits', this.state.articles)
 
       } catch (error){
       this.setState({error})
