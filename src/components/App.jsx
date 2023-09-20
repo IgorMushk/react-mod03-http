@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import HelpLinksLoader from "./HelpLinkerLoader";
 import fetchArticlesWithQuery from "./api";
 
-//axios.defaults.baseURL = "https://hn.algolia.com/api/v1";
+////axios.defaults.baseURL = "https://hn.algolia.com/api/v1";
 
 const ArticleList = ({ articles }) => (
   <ul>
